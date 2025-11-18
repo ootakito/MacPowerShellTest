@@ -1,27 +1,25 @@
-$sourceDir = "/Users/ootakitoshihiro/PowerShellTest/Logs"
-$archiveDir = "/Users/ootakitoshihiro/PowerShellTest/LogArchive"
+$path = "/Users/ootakitoshihiro/PowerShellTest/Logs"
 
-if(-not(Test-Path $archiveDir)){
-    New-Item -ItemType Directory -Path $archiveDir | Out-Null
-    Write-Host "アーカイブフォルダ作成: $archiveDir"
+# フォルダがなければ作る
+if (-not (Test-Path $path)) {
+    New-Item -ItemType Directory -Path $path | Out-Null
+    Write-Host "作成完了: $path"
 } else {
-    Write-Host "アーカイブフォルダ存在: $archiveDir" 
+    Write-Host "作成済: $path"
 }
 
-$logs = Get-ChildItem $sourceDir -Filter *.log
+# ログファイルのリスト
+$logFiles = @(
+    "$path/test.log",
+    "$path/test2.log"
+)
 
-if ($logs.Count -eq 0){
-    write-Host "コピーする .log ファイルがありません"
-    return
+# タイムスタンプ作成
+$timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+$line = "[$timestamp] Backup SUCCESS"
+
+# それぞれのログに書き込む
+foreach ($logFile in $logFiles) {
+    $line | Out-File $logFile -Append
+    Write-Host "書き込み完了: $logFile"
 }
-
-foreach ($log in $logs){
-    $srcPath = $log.FullName
-    $dstPath = Join-Path $archiveDir $log.Name
-
-    Copy-Item $srcPath -Destination $dstPath -Force
-
-    Write-Host "コピー完了: $srcPath -> $dstPath"
-}
-
-Write-Host "ログのアーカイブが完了しました。"
