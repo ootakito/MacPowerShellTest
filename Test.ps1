@@ -1,7 +1,7 @@
 # ===== Mac 用に書き換えたバックアップスクリプト =====
 
 $path = "/Users/ootakitoshihiro/PowerShellTest"
-$backupDir = "/Users/ootakitoshihiro/PowerShellBackup
+$backupDir = "/Users/ootakitoshihiro/PowerShellBackup"
 
 # 元フォルダが無ければ作成
 if (-not (Test-Path $path)) {
