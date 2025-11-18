@@ -43,16 +43,16 @@ if (-not (Test-Path $path)) {
     Write-Host "作成済: $path"
 }
 
-$logFiles = @{
+# ログファイルの配列（@() を使う）
+$logFiles = @(
     "$path/test.log",
     "$path/test2.log"
-}
+)
 
 $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-$line = "[$timestamp] Backup SUCCESS " 
+$line = "[$timestamp] Backup SUCCESS"
 
-foreach ($logFile in logFiles){
+foreach ($logFile in $logFiles) {
     $line | Out-File $logFile -Append
-    write-Host "書き込み完了:logFile"
+    Write-Host "書き込み完了: $logFile"
 }
-
