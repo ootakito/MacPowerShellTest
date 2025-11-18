@@ -1,58 +1,27 @@
-# ===== Mac 用に書き換えたバックアップスクリプト =====
+$sourceDir = "/Users/ootakitoshihiro/PowerShellTest/Logs"
+$archiveDir = "/Users/ootakitoshihiro/PowerShellTest/LogArchive"
 
-# $path = "/Users/ootakitoshihiro/PowerShellTest"
-# $backupDir = "/Users/ootakitoshihiro/PowerShellBackup"
-
-# 元フォルダが無ければ作成
-# if (-not (Test-Path $path)) {
-#     New-Item -ItemType Directory -Path $path | Out-Null
-#     Write-Host "作成完了: $path"
-# } else {
-#     Write-Host "作成済: $path"
-# }
-
-# 元ファイル作成
-# $srcFile = "$path/sample.txt"
-# "Hello!" | Out-File $srcFile
-# Write-Host "元ファイルを作成しました: $srcFile"
-
-# バックアップフォルダ確認
-# if (-not (Test-Path $backupDir)) {
-#     New-Item -ItemType Directory -Path $backupDir | Out-Null
-#     Write-Host "バックアップフォルダ作成: $backupDir"
-# } else {
-#     Write-Host "バックアップフォルダ存在: $backupDir"
-# }
-
-# バックアップ実行
-# $dstFile = "$backupDir/sample.txt"
-# Copy-Item $srcFile -Destination $dstFile -Force
-# Write-Host "バックアップ済: $dstFile"
-
-# ログ出力
-# $logFile = "$backupDir/back.log"
-# $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-# "[$timestamp] Backup SUCCESS → $dstFile" | Out-File $logFile -Append
-
-$path = "/Users/ootakitoshihiro/PowerShellTest/Logs"
-
-if (-not (Test-Path $path)) {
-    New-Item -ItemType Directory -Path $path | Out-Null
-    Write-Host "作成完了: $path"
+if(-not(Test-Path $archiveDir)){
+    New-Item -ItemType Directory -Path $archiveDir | Out-Null
+    Write-Host "アーカイブフォルダ作成: $archiveDir"
 } else {
-    Write-Host "作成済: $path"
+    Write-Host "アーカイブフォルダ存在: $archiveDir" 
 }
 
-# ログファイルの配列（@() を使う）
-$logFiles = @(
-    "$path/test.log",
-    "$path/test2.log"
-)
+$logs = Get-ChildItem $sourceDir -Filter *.log
 
-$timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-$line = "[$timestamp] Backup SUCCESS"
-
-foreach ($logFile in $logFiles) {
-    $line | Out-File $logFile -Append
-    Write-Host "書き込み完了: $logFile"
+if ($logs.Count -eq 0){
+    write-Host "コピーする .log ファイルがありません"
+    return
 }
+
+foreach ($log in $logs){
+    $srcPath = $log.FullName
+    $dstPath = Join-Path $archiveDir $log.Name
+
+    Copy-Item $srcPath -Destination $dstPath -Force
+
+    Write-Host "コピー完了: $srcPath -> $dstPath"
+}
+
+Write-Host "ログのアーカイブが完了しました。"
