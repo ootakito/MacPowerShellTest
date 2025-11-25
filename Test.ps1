@@ -1,4 +1,3 @@
-# ===== 1. ログアーカイブ関数 ==================================
 function Invoke-LogArchive {
     param(
         [Parameter(Mandatory = $true)]
@@ -20,7 +19,7 @@ function Invoke-LogArchive {
             New-Item -ItemType Directory -Path $ArchiveDir | Out-Null
             # Out-Nullは余計なログを出させない工夫
             Write-Host "アーカイブフォルダ作成: $ArchiveDir"
-            "$timesstamp INFO アーカイブフォルダ作成: $ArchiveDir" | Out-File $LogFile -Append
+            "$timestamp INFO アーカイブフォルダ作成: $ArchiveDir" | Out-File $LogFile -Append
             # Out-Fileはファイルに書くという意味この場合、ログファイルに書いてる
         } else {
             Write-Host "アーカイブフォルダ存在: $ArchiveDir"
@@ -57,7 +56,7 @@ function Invoke-LogArchive {
         # $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"はローカルスコープ内で記述すれば正確な時間がわかる
         Write-Host "エラー発生(アーカイブ): $errMsg" -ForegroundColor Red
         # -ForegroundColor 色を付ける
-        "timestamp ERROR アーカイブ中にエラー: $errMsg" | Out-File $logFile -Append
+        "$timestamp ERROR アーカイブ中にエラー: $errMsg" | Out-File $logFile -Append
         return 1
     }
 
@@ -71,31 +70,31 @@ function Test-LogError {
 
     $ErrorActionPreference = 'Stop'
 
-try{
-    if(-not(Test-Path $LogFile)){
-        Write-Host "ログファイルが存在しません: $LogFile" -ForegroundColor Yellow
-        return 1   # 無い時はエラー扱いにしておく
+    try{
+        if(-not(Test-Path $LogFile)){
+            Write-Host "ログファイルが存在しません: $LogFile" -ForegroundColor Yellow
+            return 1   # 無い時はエラー扱いにしておく
+        }
+
+        $content = Get-Content -Path $logFile
+        # Get-Contentは読み取る-Pathは指定する何を読み取るか
+        if($content -match "ERROR"){
+            Write-Host "ログにERRORが含まれてます。" -ForegroundColor Red
+            return 1 
+        }else{
+            Write-Host "ログにERRORはありません。" -ForegroundColor Green
+            return 0
+        }   
+    } catch {
+        $errMsg = $_.Exception.Message
+        Write-Host "エラー発生(ERROR判定) : $errMsg" -ForegroundColor Red
+        return 1    
     }
-
-    $content = Get-Content -Path $logFile
-    # Get-Contentは読み取る-Pathは指定する何を読み取るか
-    if($content -match "ERROR"){
-        Write-Host "ログにERRORが含まれてます。" -ForegroundColor Red
-        return 1 
-    }else{
-        Write-Host "ログにERRORはありません。" -ForegroundColor Green
-        return 0
-    }   
-} catch {
-    $errMsg = $_.Exception.Message
-    Write-Host "エラー発生(ERROR判定) : $errMsg" -ForegroundColor Red
-    return 1    
-}
 }
 
-$ sourceDir = "/Users/ootakitoshihiro/PowerShellTest/Logs"
-$ archiveDir = "/Users/ootakitoshihiro/PowerShellTest/LogArchive"
-$ logFile = "/Users/ootakitoshihiro/PowerShellTest/archive.log"
+$sourceDir = "/Users/ootakitoshihiro/PowerShellTest/Logs"
+$archiveDir = "/Users/ootakitoshihiro/PowerShellTest/LogArchive"
+$logFile = "/Users/ootakitoshihiro/PowerShellTest/archive.log"
 
 $archiveExit = Invoke-LogArchive -SourceDir $sourceDir -ArchiveDir $archiveDir -LogFile $logFile
 # 関数を呼び出して失敗か成功か判断してる-SourceDirの-は引数$sourceDirが-SourceDirになり関数の引数になる
