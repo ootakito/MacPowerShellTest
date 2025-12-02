@@ -53,7 +53,7 @@ function Invoke-LogArchive {
     } catch {
         $errMsg = $_.Exception.Message
         $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-        # $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"はローカルスコープ内で記述すれば正確な時間がわかる
+        # $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"はローカルスコープ内で記述すれば正確な時間がわかる。
         Write-Host "エラー発生(アーカイブ): $errMsg" -ForegroundColor Red
         # -ForegroundColor 色を付ける
         "$timestamp ERROR アーカイブ中にエラー: $errMsg" | Out-File $logFile -Append
