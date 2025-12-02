@@ -1,0 +1,37 @@
+
+2025-11-19 17:36:15 INFO アーカイブフォルダ存在: /Users/ootakitoshihiro/PowerShellTest/LogArchive
+2025-11-19 17:36:15 INFO コピー完了: /Users/ootakitoshihiro/PowerShellTest/Logs/test.log -> /Users/ootakitoshihiro/PowerShellTest/LogArchive/test.log
+2025-11-19 17:36:15 INFO コピー完了: /Users/ootakitoshihiro/PowerShellTest/Logs/test2.log -> /Users/ootakitoshihiro/PowerShellTest/LogArchive/test2.log
+2025-11-19 17:36:15 INFO  ログのアーカイブが正常終了しました。
+2025-11-25 16:31:03 INFO アーカイブフォルダ存在: /Users/ootakitoshihiro/PowerShellTest/LogArchive
+2025-11-25 16:31:03 INFO コピー完了: /Users/ootakitoshihiro/PowerShellTest/Logs/test.log -> /Users/ootakitoshihiro/PowerShellTest/LogArchive/test.log
+2025-11-25 16:31:03 INFO コピー完了: /Users/ootakitoshihiro/PowerShellTest/Logs/test2.log -> /Users/ootakitoshihiro/PowerShellTest/LogArchive/test2.log
+2025-11-25 16:31:03 INFO  ログのアーカイブが正常終了しました。
+2025-11-26 16:31:01 INFO アーカイブフォルダ存在: /Users/ootakitoshihiro/PowerShellTest/LogArchive
+2025-11-26 16:31:01 INFO コピー完了: /Users/ootakitoshihiro/PowerShellTest/Logs/test.log -> /Users/ootakitoshihiro/PowerShellTest/LogArchive/test.log
+2025-11-26 16:31:01 INFO コピー完了: /Users/ootakitoshihiro/PowerShellTest/Logs/test2.log -> /Users/ootakitoshihiro/PowerShellTest/LogArchive/test2.log
+2025-11-26 16:31:01 INFO  ログのアーカイブが正常終了しました。
+2025-11-27 16:31:07 INFO アーカイブフォルダ存在: /Users/ootakitoshihiro/PowerShellTest/LogArchive
+2025-11-27 16:31:07 INFO コピー完了: /Users/ootakitoshihiro/PowerShellTest/Logs/test.log -> /Users/ootakitoshihiro/PowerShellTest/LogArchive/test.log
+2025-11-27 16:31:07 INFO コピー完了: /Users/ootakitoshihiro/PowerShellTest/Logs/test2.log -> /Users/ootakitoshihiro/PowerShellTest/LogArchive/test2.log
+2025-11-27 16:31:07 INFO  ログのアーカイブが正常終了しました。
+2025-11-28 16:44:20 INFO アーカイブフォルダ存在: /Users/ootakitoshihiro/PowerShellTest/LogArchive
+2025-11-28 16:44:20 INFO コピー完了: /Users/ootakitoshihiro/PowerShellTest/Logs/test.log -> /Users/ootakitoshihiro/PowerShellTest/LogArchive/test.log
+2025-11-28 16:44:20 INFO コピー完了: /Users/ootakitoshihiro/PowerShellTest/Logs/test2.log -> /Users/ootakitoshihiro/PowerShellTest/LogArchive/test2.log
+2025-11-28 16:44:20 INFO  ログのアーカイブが正常終了しました。
+2025-11-29 16:32:50 INFO アーカイブフォルダ存在: /Users/ootakitoshihiro/PowerShellTest/LogArchive
+2025-11-29 16:32:50 INFO コピー完了: /Users/ootakitoshihiro/PowerShellTest/Logs/test.log -> /Users/ootakitoshihiro/PowerShellTest/LogArchive/test.log
+2025-11-29 16:32:50 INFO コピー完了: /Users/ootakitoshihiro/PowerShellTest/Logs/test2.log -> /Users/ootakitoshihiro/PowerShellTest/LogArchive/test2.log
+2025-11-29 16:32:50 INFO  ログのアーカイブが正常終了しました。
+2025-11-30 16:48:50 INFO アーカイブフォルダ存在: /Users/ootakitoshihiro/PowerShellTest/LogArchive
+2025-11-30 16:48:50 INFO コピー完了: /Users/ootakitoshihiro/PowerShellTest/Logs/test.log -> /Users/ootakitoshihiro/PowerShellTest/LogArchive/test.log
+2025-11-30 16:48:50 INFO コピー完了: /Users/ootakitoshihiro/PowerShellTest/Logs/test2.log -> /Users/ootakitoshihiro/PowerShellTest/LogArchive/test2.log
+2025-11-30 16:48:50 INFO  ログのアーカイブが正常終了しました。
+2025-12-01 16:37:23 INFO アーカイブフォルダ存在: /Users/ootakitoshihiro/PowerShellTest/LogArchive
+2025-12-01 16:37:23 INFO コピー完了: /Users/ootakitoshihiro/PowerShellTest/Logs/test.log -> /Users/ootakitoshihiro/PowerShellTest/LogArchive/test.log
+2025-12-01 16:37:23 INFO コピー完了: /Users/ootakitoshihiro/PowerShellTest/Logs/test2.log -> /Users/ootakitoshihiro/PowerShellTest/LogArchive/test2.log
+2025-12-01 16:37:23 INFO  ログのアーカイブが正常終了しました。
+2025-12-02 16:37:29 INFO アーカイブフォルダ存在: /Users/ootakitoshihiro/PowerShellTest/LogArchive
+2025-12-02 16:37:29 INFO コピー完了: /Users/ootakitoshihiro/PowerShellTest/Logs/test.log -> /Users/ootakitoshihiro/PowerShellTest/LogArchive/test.log
+2025-12-02 16:37:29 INFO コピー完了: /Users/ootakitoshihiro/PowerShellTest/Logs/test2.log -> /Users/ootakitoshihiro/PowerShellTest/LogArchive/test2.log
+2025-12-02 16:37:29 INFO  ログのアーカイブが正常終了しました。

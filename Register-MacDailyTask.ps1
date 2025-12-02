@@ -1,5 +1,8 @@
 # Register-MacDailyTask.ps1
-# macOS 用：毎日指定時刻に ps1 を実行する launchd タスク登録
+# macOS 用：毎日指定時刻に LogArchive.ps1 を実行する launchd タスクを登録
+
+# 実行したい ps1 のフルパス（ここは自分の環境に合わせて）
+$targetScript = "/Users/ootakitoshihiro/MacPowerShellTest/LogArchive.ps1"
 
 function Register-MacDailyTask {
     param(
@@ -8,22 +11,29 @@ function Register-MacDailyTask {
 
         [Parameter(Mandatory)]
         [int]$Hour,            # 0-23
+
         [int]$Minute = 0,
         [string]$Label = "com.example.logarchive.daily"
     )
 
+    # macOS 以外では使わせない
     if (-not $IsMacOS) {
-        throw "この関数は macOS 専用です。"
+        throw "この関数はmacOS専用です。"
     }
 
-    # PowerShell 本体のパス（pwsh）
+    # pwsh のフルパス取得
     $pwshPath = (Get-Command pwsh).Source
 
     # LaunchAgents のパスを組み立て
     $launchAgentsDir = Join-Path $HOME "Library/LaunchAgents"
+
+    # フォルダがなければ作成
     if (-not (Test-Path $launchAgentsDir)) {
         New-Item -ItemType Directory -Path $launchAgentsDir -Force | Out-Null
     }
+
+    # plist の出力先（Label をそのままファイル名に）
+    $dest = Join-Path $launchAgentsDir "$Label.plist"
 
     # plist 本体
     $plist = @"
@@ -50,23 +60,21 @@ function Register-MacDailyTask {
 </plist>
 "@
 
-    $dest = Join-Path $launchAgentsDir "$Label.plist"
-
-    # UTF-8 で plist を出力（変な文字防止！）
+    # UTF-8 で plist を出力
     $plist | Out-File -FilePath $dest -Encoding utf8
 
     # 一旦 unload → load し直し
     launchctl unload "$dest" 2>$null
     launchctl load "$dest"
 
-    Write-Host "登録完了: $dest を 毎日 $Hour:$('{0:D2}' -f $Minute) に実行"
+    # 登録完了メッセージ
+    Write-Host ("登録完了: {0} を 毎日 {1}:{2:D2} に実行" -f $dest, $Hour, $Minute)
 }
 
-# ==== ここから下は「実際の登録コマンド」の例 ====
-
-# 実際に動かしたい ps1 のフルパスに変える
-# 例: /Users/ootaki/ps/LogArchive.ps1
-$targetScript = "/Users/あなたのユーザー名/ps/LogArchive.ps1"
-
-# 毎日 3:00 に実行する例
-Register-MacDailyTask -ScriptPath $targetScript -Hour 3 -Minute 0 -Label "com.example.logarchive.daily"
+# ==== 実際の登録コマンド呼び出し部分 ====
+# 今の時刻 + 数分に合わせて Hour / Minute を変えてテスト
+Register-MacDailyTask `
+  -ScriptPath $targetScript `
+  -Hour 16 `
+  -Minute 31 `
+  -Label "com.example.logarchive.daily"
